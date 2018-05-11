@@ -1,4 +1,4 @@
-package com.example.lattitude.masterflow.dummy;
+package com.example.lattitude.w2d4e1.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,18 +55,18 @@ public class DummyContent {
      */
     public static class DummyItem {
         public final String id;
-        public final String item_name;
-        public final String url;
+        public final String content;
+        public final String details;
 
-        public DummyItem(String id, String item_name, String url) {
+        public DummyItem(String id, String content, String details) {
             this.id = id;
-            this.item_name = item_name;
-            this.url = url;
+            this.content = content;
+            this.details = details;
         }
 
         @Override
         public String toString() {
-            return item_name;
+            return content;
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.lattitude.masterflow;
+package com.example.lattitude.w2d4e1;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,19 +15,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.example.lattitude.masterflow.dummy.DummyContent;
+import com.example.lattitude.w2d4e1.dummy.DummyContent;
 
 import java.util.List;
 
 /**
- * An activity representing a list of webpages. This activity
+ * An activity representing a list of Items. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link webpageDetailActivity} representing
+ * lead to a {@link ItemDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class webpageListActivity extends AppCompatActivity {
+public class ItemListActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -38,7 +38,7 @@ public class webpageListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webpage_list);
+        setContentView(R.layout.activity_item_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,7 +53,7 @@ public class webpageListActivity extends AppCompatActivity {
             }
         });
 
-        if (findViewById(R.id.webpage_detail_container) != null) {
+        if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -61,7 +61,7 @@ public class webpageListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.webpage_list);
+        View recyclerView = findViewById(R.id.item_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
@@ -82,23 +82,23 @@ public class webpageListActivity extends AppCompatActivity {
                 DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(webpageDetailFragment.ARG_ITEM_ID, item.id);
-                    webpageDetailFragment fragment = new webpageDetailFragment();
+                    arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
+                    ItemDetailFragment fragment = new ItemDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.webpage_detail_container, fragment)
+                            .replace(R.id.item_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, webpageDetailActivity.class);
-                    intent.putExtra(webpageDetailFragment.ARG_ITEM_ID, item.id);
+                    Intent intent = new Intent(context, ItemDetailActivity.class);
+                    intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id);
 
                     context.startActivity(intent);
                 }
             }
         };
 
-        SimpleItemRecyclerViewAdapter(webpageListActivity parent,
+        SimpleItemRecyclerViewAdapter(ItemListActivity parent,
                                       List<DummyContent.DummyItem> items,
                                       boolean twoPane) {
             mValues = items;
@@ -109,7 +109,7 @@ public class webpageListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.webpage_list_content, parent, false);
+                    .inflate(R.layout.item_list_content, parent, false);
             return new ViewHolder(view);
         }
 
