@@ -1,4 +1,4 @@
-package com.example.lattitude.masterflow;
+package com.example.lattitude.masterdetail;
 
 import org.junit.Test;
 
